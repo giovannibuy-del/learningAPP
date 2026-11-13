@@ -1,0 +1,82 @@
+[
+  {
+    "id": "pfote-lecken",
+    "label": "Pfote lecken",
+    "frames": 6,
+    "width": 320,
+    "height": 320,
+    "bytes": 123282
+  },
+  {
+    "id": "katzenbuckel",
+    "label": "Katzenbuckel",
+    "frames": 6,
+    "width": 320,
+    "height": 320,
+    "bytes": 138730
+  },
+  {
+    "id": "ball-spielen",
+    "label": "Mit einem Ball spielen",
+    "frames": 6,
+    "width": 320,
+    "height": 320,
+    "bytes": 149345
+  },
+  {
+    "id": "schlafen",
+    "label": "Zusammengerollt schlafen",
+    "frames": 4,
+    "width": 320,
+    "height": 320,
+    "bytes": 118855
+  },
+  {
+    "id": "sarkastisch",
+    "label": "Sarkastisch schauen",
+    "frames": 6,
+    "width": 320,
+    "height": 320,
+    "bytes": 130013
+  },
+  {
+    "id": "futter-betteln",
+    "label": "Um Futter betteln",
+    "frames": 6,
+    "width": 320,
+    "height": 320,
+    "bytes": 143027
+  },
+  {
+    "id": "gluecklich-huepfen",
+    "label": "Glücklich hüpfen",
+    "frames": 4,
+    "width": 320,
+    "height": 320,
+    "bytes": 70526
+  },
+  {
+    "id": "beine-strecken",
+    "label": "Alle Beine nach oben strecken",
+    "frames": 6,
+    "width": 320,
+    "height": 320,
+    "bytes": 152778
+  },
+  {
+    "id": "gaehnen",
+    "label": "Gähnen",
+    "frames": 7,
+    "width": 320,
+    "height": 320,
+    "bytes": 156038
+  },
+  {
+    "id": "schnurren",
+    "label": "Zufrieden schnurren",
+    "frames": 4,
+    "width": 320,
+    "height": 320,
+    "bytes": 86084
+  }
+]

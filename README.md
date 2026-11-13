@@ -42,3 +42,21 @@ Kursänderungen, Tipps und Lernfortschritt werden ausschliesslich im Local Stora
 - `dist/style.css`, `dist/nature.css`: Layout und Naturdesign
 - `dist/assets/`: generierte Landschaft und Katergrafik
 - `checks/`: Funktionsprüfungen ohne zusätzliche Abhängigkeiten
+
+## Milos Animationen
+
+Milo hat zehn transparente, animierte GIFs in `dist/assets/milo/`:
+Pfote lecken, Katzenbuckel, mit dem Ball spielen, schlafen, sarkastisch schauen,
+um Futter betteln, glücklich hüpfen, Beine nach oben strecken, gähnen und schnurren.
+Beim Aufgabenwechsel (Öffnen eines anderen Kapitels) wird zufällig eine andere
+Animation gewählt; direkte Wiederholungen werden vermieden. Beim Prüfen einer
+Antwort oder Wechseln eines Tipps bleibt die gewählte Pose erhalten.
+Bei `prefers-reduced-motion: reduce` werden die passenden PNG-Standbilder angezeigt.
+
+Die verlustfreien 2×2-Quellbildfolgen liegen in `artwork/milo/`. Mit Python und Pillow
+lassen sich GIFs und Standbilder reproduzieren:
+
+```sh
+python3 scripts/build-milo-gifs.py
+node checks/animations.cjs
+```
