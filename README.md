@@ -60,3 +60,21 @@ lassen sich GIFs und Standbilder reproduzieren:
 python3 scripts/build-milo-gifs.py
 node checks/animations.cjs
 ```
+
+## Oberbegriffe und Beiträge
+
+Über dem Inhalt wählst du einen Oberbegriff. Jeder Oberbegriff hat bis zu zwölf
+Beiträge sowie einen eigenen Lernpfad, Fortschritt und Wissenschecks. Weitere
+Oberbegriffe legst du unter „Inhalte verwalten“ über „Oberbegriff anlegen“ an.
+Der Name lässt sich im Feld „Oberbegriff“ des Beitragseditors ändern.
+Es gibt kein globales Zwölferlimit mehr.
+
+Bestehende lokale Daten und ältere JSON-Exporte werden automatisch übernommen.
+Falls ein alter Export mehr als zwölf Beiträge enthält, werden zusätzliche
+Oberbegriffe für die Fortsetzungen erstellt. Beiträge, Antworten und Fortschritt
+bleiben dabei erhalten. Exporte enthalten alle Oberbegriffe und Milos Tipps.
+Die Speicherung bleibt lokal im Browser.
+
+```sh
+node checks/topics.cjs
+```
