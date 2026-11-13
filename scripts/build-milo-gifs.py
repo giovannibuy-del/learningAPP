@@ -1,4 +1,4 @@
-"""Build transparent, looping GIFs and reduced-motion PNGs from 2x2 Milo sheets.
+"""Build transparent, single-play GIFs and reduced-motion PNGs from 2x2 Milo sheets.
 
 Requires Pillow. Source sheets live in artwork/milo; no network calls.
 Run from any directory: python3 scripts/build-milo-gifs.py
@@ -61,9 +61,9 @@ for key, (label, sequence, durations) in POSES.items():
         indexed.append(paletted)
     gif = OUT / f'{key}.gif'
     ordered = [indexed[i] for i in sequence]
-    ordered[0].save(gif, save_all=True, append_images=ordered[1:], duration=durations, loop=0, transparency=255, disposal=2, optimize=False)
+    ordered[0].save(gif, save_all=True, append_images=ordered[1:], duration=durations, transparency=255, disposal=2, optimize=False)
     with Image.open(gif) as check:
-        assert check.n_frames >= 4 and check.info['loop'] == 0 and 'transparency' in check.info
+        assert check.n_frames >= 4 and 'loop' not in check.info and 'transparency' in check.info
         distinct = {check.seek(i) or check.convert('RGBA').tobytes() for i in range(check.n_frames)}
         assert len(distinct) >= 4, f'Animation {key} lacks distinct frames'
         count = check.n_frames

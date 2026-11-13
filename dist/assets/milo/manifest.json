@@ -5,7 +5,7 @@
     "frames": 6,
     "width": 320,
     "height": 320,
-    "bytes": 123282
+    "bytes": 123263
   },
   {
     "id": "katzenbuckel",
@@ -13,7 +13,7 @@
     "frames": 6,
     "width": 320,
     "height": 320,
-    "bytes": 138730
+    "bytes": 138711
   },
   {
     "id": "ball-spielen",
@@ -21,7 +21,7 @@
     "frames": 6,
     "width": 320,
     "height": 320,
-    "bytes": 149345
+    "bytes": 149326
   },
   {
     "id": "schlafen",
@@ -29,7 +29,7 @@
     "frames": 4,
     "width": 320,
     "height": 320,
-    "bytes": 118855
+    "bytes": 118836
   },
   {
     "id": "sarkastisch",
@@ -37,7 +37,7 @@
     "frames": 6,
     "width": 320,
     "height": 320,
-    "bytes": 130013
+    "bytes": 129994
   },
   {
     "id": "futter-betteln",
@@ -45,7 +45,7 @@
     "frames": 6,
     "width": 320,
     "height": 320,
-    "bytes": 143027
+    "bytes": 143008
   },
   {
     "id": "gluecklich-huepfen",
@@ -53,7 +53,7 @@
     "frames": 4,
     "width": 320,
     "height": 320,
-    "bytes": 70526
+    "bytes": 70507
   },
   {
     "id": "beine-strecken",
@@ -61,7 +61,7 @@
     "frames": 6,
     "width": 320,
     "height": 320,
-    "bytes": 152778
+    "bytes": 152759
   },
   {
     "id": "gaehnen",
@@ -69,7 +69,7 @@
     "frames": 7,
     "width": 320,
     "height": 320,
-    "bytes": 156038
+    "bytes": 156019
   },
   {
     "id": "schnurren",
@@ -77,6 +77,6 @@
     "frames": 4,
     "width": 320,
     "height": 320,
-    "bytes": 86084
+    "bytes": 86065
   }
 ]

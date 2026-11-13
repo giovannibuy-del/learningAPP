@@ -49,7 +49,7 @@ Milo hat zehn transparente, animierte GIFs in `dist/assets/milo/`:
 Pfote lecken, Katzenbuckel, mit dem Ball spielen, schlafen, sarkastisch schauen,
 um Futter betteln, glücklich hüpfen, Beine nach oben strecken, gähnen und schnurren.
 Beim Aufgabenwechsel (Öffnen eines anderen Kapitels) wird zufällig eine andere
-Animation gewählt; direkte Wiederholungen werden vermieden. Beim Prüfen einer
+Animation gewählt; direkte Wiederholungen werden vermieden. Jede GIF-Animation läuft nur einmal und bleibt danach auf ihrem letzten Bild stehen. Tippwechsel starten sie nicht erneut. Beim Prüfen einer
 Antwort oder Wechseln eines Tipps bleibt die gewählte Pose erhalten.
 Bei `prefers-reduced-motion: reduce` werden die passenden PNG-Standbilder angezeigt.
 
