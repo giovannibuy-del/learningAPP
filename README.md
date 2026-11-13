@@ -1,80 +1,81 @@
-# Lumio · Dein Lernraum
+# Lumio · Geschützter Lernraum
 
-Browserbasierte Lern-App mit grünem Liquid-Glass-Design, einer Indian-Summer-Landschaft und dem animierten schwarzweissen Lernbegleiter Milo.
+Lern-App im grünen Liquid-Glass-Design mit Oberbegriffen, jeweils bis zu zwölf
+Beiträgen, Wissenschecks und dem animierten Lernbegleiter Milo.
 
-## Funktionen
+## Anmeldung und Rollen
 
-- Lernpfad mit frei zugänglichen Kapiteln und Fortschrittsanzeige
-- Klimakurs mit fünf Kapiteln und Wissenschecks
-- Editor für Lerntexte, Bilder und Quizfragen
-- Editierbare Tipps und Wechselintervall für Milo
-- Lokale Speicherung sowie JSON-Import und -Export
-- Responsive Oberfläche und Berücksichtigung reduzierter Bewegung
+Die gehostete App verwendet die von Sites bereitgestellte Anmeldung mit ChatGPT.
+Ohne bestätigte Identität werden weder die App noch ihre Inhalte ausgeliefert.
+Benutzer müssen zusätzlich in der Benutzerverwaltung freigeschaltet sein.
 
-## Lokal starten
+- **Admin:** alle Lernbereiche, Inhaltseditor, Benutzer, Gruppen und Freigaben.
+- **Benutzer:** nur die Oberbegriffe, die ihrer Gruppe zugeordnet wurden;
+  persönlicher Lernfortschritt und serverseitige Quizprüfung.
 
-Keine Installation oder Build-Schritte erforderlich. Im Projektverzeichnis ausführen:
+Das in der geheimen Servervariable `OWNER_EMAIL` konfigurierte Eigentümerkonto
+wird der erste Admin. Es kann über die Benutzerverwaltung nicht gesperrt oder
+herabgestuft werden. Weitere Admins können angelegt werden. Konten werden über
+die bestätigte ChatGPT-E-Mail vorgemerkt und beim ersten Login an die stabile
+Sites-Benutzer-ID gebunden. Es werden keine eigenen Passwörter gespeichert.
+
+## Benutzer freischalten
+
+1. Als Admin anmelden und „Benutzer & Gruppen“ öffnen.
+2. Eine Gruppe erstellen.
+3. Der Gruppe die gewünschten Oberbegriffe zuordnen.
+4. Benutzer mit der E-Mail ihres ChatGPT-Kontos und ihrer Gruppe anlegen.
+5. Solange die Site privat ist, die Personen zusätzlich über die Site-Freigabe
+   als Besucher einladen. Die App ändert die Site-Freigabe nicht automatisch.
+
+Zugriffsprüfungen erfolgen bei jeder Serveranfrage. Deaktivierungen und geänderte
+Gruppenfreigaben gelten für nachfolgende Anfragen. Bereits angezeigte Inhalte
+können nachträglich nicht vom Gerät einer Person zurückgerufen werden.
+
+## Daten
+
+Lerninhalte, Rollen, Gruppen, Freigaben und persönliche Fortschritte liegen in D1.
+Benutzer können keine gemeinsamen Inhalte oder Rechte schreiben. Quizantworten
+werden auf dem Server bewertet. Richtige Lösungen werden erst nach erfolgreicher
+Beantwortung ausgeliefert. Geänderte Fragen setzen den betreffenden Lernfortschritt
+zurück. Gleichzeitige Änderungen durch Admins werden durch Versionsprüfungen erkannt.
+
+Vorherige lokale Inhalte können vom Admin über den Hinweis „Lokale Inhalte
+übernehmen“ oder per JSON-Import übernommen werden. Die alte Browsersicherung
+bleibt erhalten. Importierte Lerninhalte erhalten neue IDs; Gruppenfreigaben
+müssen dafür neu gesetzt werden. Persönliche Fortschritte werden nach der Umstellung
+auf dem Server neu geführt. Ein Admin-Export enthält alle Lerninhalte und Tipps.
+
+## Build und Prüfungen
+
+Node.js 22+ und Python 3 (nur für die SQLite-Integrationstests):
 
 ```sh
-python3 -m http.server 8000 --directory dist
-```
-
-Anschliessend http://localhost:8000 öffnen.
-
-## Prüfungen
-
-Mit Node.js:
-
-```sh
+node scripts/build-worker.mjs
+node checks/auth.mjs
+node checks/topics.cjs
 node checks/smoke.cjs
 node checks/companion.cjs
-```
-
-## Daten und Zugriff
-
-Kursänderungen, Tipps und Lernfortschritt werden ausschliesslich im Local Storage des jeweiligen Browsers gespeichert. Die App hat keine Benutzerkonten, geschützte Admin-Rollen oder gemeinsame Datenbank. Der Inhaltseditor ist für alle Besucher zugänglich; Änderungen betreffen deren eigenen Browser. Über den JSON-Export lassen sich die lokalen Daten sichern und übertragen.
-
-## Dateien
-
-- `dist/index.html`: Einstiegspunkt
-- `dist/app.js`: Lerninhalte, Quiz, Editor und Speicherung
-- `dist/companion.js`: Milo, Tippwechsel und Tippeditor
-- `dist/style.css`, `dist/nature.css`: Layout und Naturdesign
-- `dist/assets/`: generierte Landschaft und Katergrafik
-- `checks/`: Funktionsprüfungen ohne zusätzliche Abhängigkeiten
-
-## Milos Animationen
-
-Milo hat zehn transparente, animierte GIFs in `dist/assets/milo/`:
-Pfote lecken, Katzenbuckel, mit dem Ball spielen, schlafen, sarkastisch schauen,
-um Futter betteln, glücklich hüpfen, Beine nach oben strecken, gähnen und schnurren.
-Beim Aufgabenwechsel (Öffnen eines anderen Kapitels) wird zufällig eine andere
-Animation gewählt; direkte Wiederholungen werden vermieden. Jede GIF-Animation läuft nur einmal und bleibt danach auf ihrem letzten Bild stehen. Tippwechsel starten sie nicht erneut. Beim Prüfen einer
-Antwort oder Wechseln eines Tipps bleibt die gewählte Pose erhalten.
-Bei `prefers-reduced-motion: reduce` werden die passenden PNG-Standbilder angezeigt.
-
-Die verlustfreien 2×2-Quellbildfolgen liegen in `artwork/milo/`. Mit Python und Pillow
-lassen sich GIFs und Standbilder reproduzieren:
-
-```sh
-python3 scripts/build-milo-gifs.py
 node checks/animations.cjs
 ```
 
-## Oberbegriffe und Beiträge
+`worker/index.mjs` enthält den Server. `dist/` enthält die Frontend-Quellen und
+`dist/server/index.js` den erzeugten Worker mit geschützten Assets. Die
+Hosting-Konfiguration bindet D1 als `DB` ein; Schemaänderungen liegen in
+`migrations/`. Die Migrationen werden beim Sites-Deployment angewendet.
+`OWNER_EMAIL` wird als geheime Sites-Laufzeitvariable konfiguriert und gehört
+nicht ins Repository. Ohne DB oder diese Variable verweigert der Server den Zugriff.
+Das Öffnen der HTML-Datei über einen einfachen Dateiserver ist nur eine lokale
+Demo und bietet keine produktive Anmeldung. Produktionsbetrieb erfordert den Worker
+hinter der Sites-Anmeldung.
 
-Über dem Inhalt wählst du einen Oberbegriff. Jeder Oberbegriff hat bis zu zwölf
-Beiträge sowie einen eigenen Lernpfad, Fortschritt und Wissenschecks. Weitere
-Oberbegriffe legst du unter „Inhalte verwalten“ über „Oberbegriff anlegen“ an.
-Der Name lässt sich im Feld „Oberbegriff“ des Beitragseditors ändern.
-Es gibt kein globales Zwölferlimit mehr.
+## Milo
 
-Bestehende lokale Daten und ältere JSON-Exporte werden automatisch übernommen.
-Falls ein alter Export mehr als zwölf Beiträge enthält, werden zusätzliche
-Oberbegriffe für die Fortsetzungen erstellt. Beiträge, Antworten und Fortschritt
-bleiben dabei erhalten. Exporte enthalten alle Oberbegriffe und Milos Tipps.
-Die Speicherung bleibt lokal im Browser.
+Zehn transparente GIFs in `dist/assets/milo/` werden bei Aufgabenwechseln zufällig
+ausgewählt, ohne direkte Wiederholung. Jede Animation läuft einmal. Tippwechsel
+starten sie nicht neu. Bei reduzierter Bewegung werden PNG-Standbilder angezeigt.
+Die Quellbildfolgen liegen in `artwork/milo/`. Mit Pillow neu erzeugen:
 
 ```sh
-node checks/topics.cjs
+python3 scripts/build-milo-gifs.py
 ```

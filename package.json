@@ -1,0 +1,1 @@
+{"name":"lumio-learning","private":true,"type":"module","scripts":{"build":"node scripts/build-worker.mjs","test":"node checks/auth.mjs && node checks/topics.cjs && node checks/smoke.cjs && node checks/companion.cjs && node checks/animations.cjs"}}
